@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://cok7ymoovvpak"]
+
+[ext_resource type="Script" path="res://FileMonitorDisplay.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://curng6dw55s3h" path="res://addons/EasyFiles/icons/Add.svg" id="2"]
+
+[node name="FileMonitorDisplay" type="PanelContainer"]
+offset_top = 188.0
+offset_right = 149.0
+offset_bottom = 202.0
+script = ExtResource("1")
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="toggl" type="Button" parent="VBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "open monitor"
+
+[node name="add" type="Button" parent="VBox/HBox"]
+visible = false
+layout_mode = 2
+icon = ExtResource("2")
+
+[node name="mutebtn" type="CheckBox" parent="VBox"]
+layout_mode = 2
+text = "mute"
+
+[node name="Labels" type="RichTextLabel" parent="VBox"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[connection signal="toggled" from="VBox/HBox/toggl" to="." method="_on_toggl_toggled"]
+[connection signal="pressed" from="VBox/HBox/add" to="." method="_on_add_pressed"]

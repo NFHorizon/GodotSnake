@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1qv5h07xjsmm"]
+
+[ext_resource type="Texture2D" uid="uid://dvieyeqt30ye6" path="res://map/tile_map.png" id="1_61b1e"]
+[ext_resource type="PackedScene" uid="uid://dkigdf6u3luhy" path="res://scenes/snake.tscn" id="2_gmhyi"]
+[ext_resource type="PackedScene" uid="uid://cglbbqlpcl6cq" path="res://scenes/bean.tscn" id="3_1vo7k"]
+[ext_resource type="Script" path="res://scenes/snake.gd" id="3_kjymq"]
+[ext_resource type="Script" path="res://scenes/bean.gd" id="5_ebwa4"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="6_7s2h4"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+format = 2
+
+[node name="TileMap2" type="Sprite2D" parent="."]
+position = Vector2(1089, 493)
+texture = ExtResource("1_61b1e")
+
+[node name="Snake" parent="." instance=ExtResource("2_gmhyi")]
+position = Vector2(763, 489)
+script = ExtResource("3_kjymq")
+
+[node name="Bean" parent="." instance=ExtResource("3_1vo7k")]
+scale = Vector2(0.883656, 0.970863)
+script = ExtResource("5_ebwa4")
+
+[node name="Virtual joystick left" parent="." instance=ExtResource("6_7s2h4")]
+anchors_preset = 0
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = 157.0
+offset_top = 703.0
+offset_right = 381.0
+offset_bottom = 942.0
+grow_vertical = 1
+scale = Vector2(1, 1)
+clampzone_size = 100.0
+joystick_mode = 2
