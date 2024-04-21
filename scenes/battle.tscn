@@ -16,9 +16,10 @@ format = 2
 position = Vector2(1089, 493)
 texture = ExtResource("1_61b1e")
 
-[node name="Snake" parent="." instance=ExtResource("2_gmhyi")]
+[node name="Snake" parent="." node_paths=PackedStringArray("joystick_left") instance=ExtResource("2_gmhyi")]
 position = Vector2(763, 489)
 script = ExtResource("3_kjymq")
+joystick_left = NodePath("../Virtual joystick left")
 
 [node name="Bean" parent="." instance=ExtResource("3_1vo7k")]
 scale = Vector2(0.883656, 0.970863)
