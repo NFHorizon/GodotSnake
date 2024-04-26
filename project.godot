@@ -15,6 +15,10 @@ run/main_scene="res://scenes/battle.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+EasyFiles="*res://addons/EasyFiles/EasyFiles.gd"
+
 [display]
 
 window/size/viewport_width=1920
@@ -31,6 +35,10 @@ project/assembly_name="GodotSnake"
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/EasyFiles/plugin.cfg", "res://addons/copilot/plugin.cfg", "res://addons/correct_conventional_naming/plugin.cfg", "res://addons/gdscript_formatter/plugin.cfg", "res://addons/phoenix_channels/plugin.cfg", "res://addons/sprite_painter/plugin.cfg", "res://addons/virtual_joystick/plugin.cfg")
+
 [input]
 
 ui_down={
@@ -40,11 +48,15 @@ ui_down={
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":1.0,"script":null)
 ]
 }
+speed_up={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
 
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
-pointing/emulate_mouse_from_touch=false
 
 [rendering]
 

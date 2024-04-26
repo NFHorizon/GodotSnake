@@ -1,6 +1,6 @@
-extends Sprite2D
+extends Area2D
 
-
+class_name Bean
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -10,3 +10,6 @@ func _ready():
 func _process(delta):
 	#print("anything11111")
 	pass
+
+func eaten():
+	queue_free()

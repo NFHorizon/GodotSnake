@@ -1,0 +1,90 @@
+[gd_scene load_steps=8 format=3 uid="uid://d1qv5h07xjsmm"]
+
+[ext_resource type="Texture2D" uid="uid://dvieyeqt30ye6" path="res://map/tile_map.png" id="1_61b1e"]
+[ext_resource type="Script" path="res://scenes/battle.gd" id="1_wtla0"]
+[ext_resource type="PackedScene" uid="uid://dkigdf6u3luhy" path="res://scenes/snake.tscn" id="2_gmhyi"]
+[ext_resource type="PackedScene" uid="uid://cglbbqlpcl6cq" path="res://scenes/bean.tscn" id="3_1vo7k"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="6_7s2h4"]
+[ext_resource type="Texture2D" uid="uid://dwytt88d1ima" path="res://icon.svg" id="6_kx0x6"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4pyvx"]
+normal = Vector2(-0.0128195, -0.999918)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_wtla0")
+bean_scene = ExtResource("3_1vo7k")
+
+[node name="TileMap" type="TileMap" parent="."]
+format = 2
+
+[node name="TileMap2" type="Sprite2D" parent="."]
+position = Vector2(1012, 562)
+texture = ExtResource("1_61b1e")
+
+[node name="Wall" type="Area2D" parent="TileMap2"]
+position = Vector2(-16, 749)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap2/Wall"]
+shape = SubResource("WorldBoundaryShape2D_4pyvx")
+
+[node name="Wall2" type="Area2D" parent="TileMap2"]
+position = Vector2(-1504, -25)
+rotation = 1.5708
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap2/Wall2"]
+shape = SubResource("WorldBoundaryShape2D_4pyvx")
+
+[node name="Wall3" type="Area2D" parent="TileMap2"]
+position = Vector2(53, -755)
+rotation = 3.14159
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap2/Wall3"]
+shape = SubResource("WorldBoundaryShape2D_4pyvx")
+
+[node name="Wall4" type="Area2D" parent="TileMap2"]
+position = Vector2(1502, 39)
+rotation = -1.5708
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap2/Wall4"]
+shape = SubResource("WorldBoundaryShape2D_4pyvx")
+
+[node name="Snake" parent="TileMap2" instance=ExtResource("2_gmhyi")]
+position = Vector2(26, -38)
+rotation = -1.5708
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Virtual joystick left" parent="CanvasLayer" instance=ExtResource("6_7s2h4")]
+anchors_preset = 0
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = 157.0
+offset_top = 703.0
+offset_right = 381.0
+offset_bottom = 942.0
+grow_vertical = 1
+scale = Vector2(1, 1)
+clampzone_size = 100.0
+joystick_mode = 2
+
+[node name="ButtonSpeedUp" type="TextureButton" parent="CanvasLayer"]
+offset_left = 1699.0
+offset_top = 760.0
+offset_right = 1827.0
+offset_bottom = 888.0
+texture_normal = ExtResource("6_kx0x6")
+
+[node name="BeanTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="body_entered" from="TileMap2/Wall" to="." method="_on_wall_body_entered"]
+[connection signal="body_entered" from="TileMap2/Wall2" to="." method="_on_wall_body_entered"]
+[connection signal="body_entered" from="TileMap2/Wall3" to="." method="_on_wall_body_entered"]
+[connection signal="body_entered" from="TileMap2/Wall4" to="." method="_on_wall_body_entered"]
+[connection signal="button_down" from="CanvasLayer/ButtonSpeedUp" to="TileMap2/Snake" method="_on_button_speed_up_pressed"]
+[connection signal="button_up" from="CanvasLayer/ButtonSpeedUp" to="TileMap2/Snake" method="_on_button_speed_up_released"]
+[connection signal="timeout" from="BeanTimer" to="." method="_on_bean_timer_timeout"]
