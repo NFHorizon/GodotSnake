@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://d1qv5h07xjsmm"]
+[gd_scene load_steps=10 format=3 uid="uid://d1qv5h07xjsmm"]
 
 [ext_resource type="Texture2D" uid="uid://dvieyeqt30ye6" path="res://map/tile_map.png" id="1_61b1e"]
 [ext_resource type="Script" path="res://scenes/battle.gd" id="1_wtla0"]
 [ext_resource type="PackedScene" uid="uid://dkigdf6u3luhy" path="res://scenes/snake.tscn" id="2_gmhyi"]
 [ext_resource type="PackedScene" uid="uid://cglbbqlpcl6cq" path="res://scenes/bean.tscn" id="3_1vo7k"]
+[ext_resource type="Script" path="res://scenes/wall.gd" id="5_375xm"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="6_7s2h4"]
-[ext_resource type="Texture2D" uid="uid://dmm3a5x6wb3vr" path="res://arts/control-flash.png" id="6_pd6tr"]
-[ext_resource type="Texture2D" uid="uid://ccbqq6rm0dfyx" path="res://arts/control-flash-light.png" id="7_ynmu1"]
+[ext_resource type="Texture2D" uid="uid://dmm3a5x6wb3vr" path="res://assets/control-flash.png" id="6_pd6tr"]
+[ext_resource type="Texture2D" uid="uid://ccbqq6rm0dfyx" path="res://assets/control-flash-light.png" id="7_ynmu1"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4pyvx"]
 normal = Vector2(-0.0128195, -0.999918)
@@ -25,6 +26,7 @@ texture = ExtResource("1_61b1e")
 
 [node name="Wall" type="Area2D" parent="TileMap2"]
 position = Vector2(-16, 749)
+script = ExtResource("5_375xm")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap2/Wall"]
@@ -33,6 +35,7 @@ shape = SubResource("WorldBoundaryShape2D_4pyvx")
 [node name="Wall2" type="Area2D" parent="TileMap2"]
 position = Vector2(-1504, -25)
 rotation = 1.5708
+script = ExtResource("5_375xm")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap2/Wall2"]
@@ -41,6 +44,7 @@ shape = SubResource("WorldBoundaryShape2D_4pyvx")
 [node name="Wall3" type="Area2D" parent="TileMap2"]
 position = Vector2(53, -755)
 rotation = 3.14159
+script = ExtResource("5_375xm")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap2/Wall3"]
@@ -49,6 +53,7 @@ shape = SubResource("WorldBoundaryShape2D_4pyvx")
 [node name="Wall4" type="Area2D" parent="TileMap2"]
 position = Vector2(1502, 39)
 rotation = -1.5708
+script = ExtResource("5_375xm")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap2/Wall4"]
@@ -58,32 +63,67 @@ shape = SubResource("WorldBoundaryShape2D_4pyvx")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Virtual joystick left" parent="CanvasLayer" instance=ExtResource("6_7s2h4")]
-anchors_preset = 0
-anchor_top = 0.0
-anchor_bottom = 0.0
-offset_left = 235.0
-offset_top = 756.0
-offset_right = 459.0
-offset_bottom = 995.0
-grow_vertical = 1
-scale = Vector2(1, 1)
-clampzone_size = 100.0
-joystick_mode = 1
+[node name="LabelKill" type="Label" parent="CanvasLayer"]
+offset_left = 69.0
+offset_top = 90.0
+offset_right = 265.0
+offset_bottom = 142.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "击杀: 0"
 
-[node name="ButtonSpeedUp" type="TouchScreenButton" parent="CanvasLayer"]
-position = Vector2(1578, 814)
-scale = Vector2(2, 2)
+[node name="LabelSnakeLength" type="Label" parent="CanvasLayer"]
+offset_left = 68.0
+offset_top = 35.0
+offset_right = 264.0
+offset_bottom = 87.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "长度: 0"
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(250, 250)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -350.0
+offset_top = -350.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.998174, 1)
+theme_override_constants/margin_right = 250
+theme_override_constants/margin_bottom = 200
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/MarginContainer2"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+
+[node name="ButtonSpeedUp" type="TouchScreenButton" parent="CanvasLayer/MarginContainer2/CenterContainer"]
+scale = Vector2(3, 3)
 texture_normal = ExtResource("6_pd6tr")
 texture_pressed = ExtResource("7_ynmu1")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+theme_override_constants/margin_left = 320
+theme_override_constants/margin_bottom = 200
+
+[node name="Virtual joystick left" parent="CanvasLayer/MarginContainer" instance=ExtResource("6_7s2h4")]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+mouse_force_pass_scroll_events = false
+clampzone_size = 100.0
 
 [node name="BeanTimer" type="Timer" parent="."]
 wait_time = 5.0
 
-[connection signal="area_entered" from="TileMap2/Wall" to="." method="_on_snake_entered"]
-[connection signal="area_entered" from="TileMap2/Wall2" to="." method="_on_snake_entered"]
-[connection signal="area_entered" from="TileMap2/Wall3" to="." method="_on_snake_entered"]
-[connection signal="area_entered" from="TileMap2/Wall4" to="." method="_on_snake_entered"]
-[connection signal="pressed" from="CanvasLayer/ButtonSpeedUp" to="." method="_on_button_speed_up_pressed"]
-[connection signal="released" from="CanvasLayer/ButtonSpeedUp" to="." method="_on_button_speed_up_released"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer2/CenterContainer/ButtonSpeedUp" to="." method="_on_button_speed_up_pressed"]
+[connection signal="released" from="CanvasLayer/MarginContainer2/CenterContainer/ButtonSpeedUp" to="." method="_on_button_speed_up_released"]
 [connection signal="timeout" from="BeanTimer" to="." method="_on_bean_timer_timeout"]

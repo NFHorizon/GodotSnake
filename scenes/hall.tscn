@@ -1,0 +1,132 @@
+[gd_scene load_steps=8 format=3 uid="uid://hbe073dmoayn"]
+
+[ext_resource type="Script" path="res://scenes/hall.gd" id="1_gv27u"]
+[ext_resource type="Texture2D" uid="uid://de0jkinfacif1" path="res://assets/背景.jpg" id="2_vabfp"]
+[ext_resource type="FontFile" uid="uid://c2swdb2lnpr54" path="res://assets/fonts/NirmalaB.ttf" id="3_wur71"]
+[ext_resource type="Texture2D" uid="uid://rsbskkdcfhvj" path="res://assets/设置界面/set_xzdian1.png" id="5_8vmgg"]
+[ext_resource type="Texture2D" uid="uid://nsobnhrnbk5m" path="res://assets/设置界面/set_anniu.png" id="5_bbpfx"]
+[ext_resource type="Texture2D" uid="uid://sqj1xrjtrp7a" path="res://assets/设置按钮.png" id="5_jm3wi"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_qrwxg"]
+
+[node name="Hall" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gv27u")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer"]
+layout_mode = 2
+texture = ExtResource("2_vabfp")
+expand_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -313.0
+offset_top = -27.0
+offset_right = 314.0
+offset_bottom = 235.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LabelSingle" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("3_wur71")
+theme_override_font_sizes/font_size = 80
+text = "Single  Player
+"
+horizontal_alignment = 1
+
+[node name="LabelRandom" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("3_wur71")
+theme_override_font_sizes/font_size = 80
+text = "Random  Players
+"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -39.0
+offset_right = 39.0
+offset_bottom = 78.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2"]
+layout_mode = 2
+
+[node name="LabelTitle" type="Label" parent="MarginContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("3_wur71")
+theme_override_font_sizes/font_size = 80
+text = "Callbreak League
+"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="MarginContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme_override_icons/radio_checked = ExtResource("5_8vmgg")
+theme_override_icons/radio_unchecked = ExtResource("5_bbpfx")
+button_pressed = true
+button_group = SubResource("ButtonGroup_qrwxg")
+text = "Standord(5 rounds)"
+
+[node name="CheckBox2" type="CheckBox" parent="MarginContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_icons/radio_checked = ExtResource("5_8vmgg")
+theme_override_icons/radio_unchecked = ExtResource("5_bbpfx")
+button_group = SubResource("ButtonGroup_qrwxg")
+text = "Quick(3 rounds)"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_bottom = 50.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer2"]
+layout_mode = 2
+icon = ExtResource("5_jm3wi")
+
+[connection signal="gui_input" from="VBoxContainer/LabelSingle" to="." method="_on_label_single_gui_input"]
+[connection signal="gui_input" from="VBoxContainer/LabelRandom" to="." method="_on_label_random_gui_input"]
+[connection signal="gui_input" from="MarginContainer2/VBoxContainer/LabelTitle" to="." method="_on_label_single_gui_input"]

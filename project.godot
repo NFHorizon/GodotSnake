@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GodotSnake"
-run/main_scene="res://scenes/battle.tscn"
+run/main_scene="res://scenes/hall.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -37,7 +37,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/EasyFiles/plugin.cfg", "res://addons/copilot/plugin.cfg", "res://addons/correct_conventional_naming/plugin.cfg", "res://addons/gdscript_formatter/plugin.cfg", "res://addons/phoenix_channels/plugin.cfg", "res://addons/sprite_painter/plugin.cfg", "res://addons/virtual_joystick/plugin.cfg")
+enabled=PackedStringArray("res://addons/EasyFiles/plugin.cfg", "res://addons/correct_conventional_naming/plugin.cfg", "res://addons/gdscript_formatter/plugin.cfg", "res://addons/phoenix_channels/plugin.cfg", "res://addons/sprite_painter/plugin.cfg", "res://addons/virtual_joystick/plugin.cfg")
 
 [input]
 

@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkigdf6u3luhy"]
+
+[ext_resource type="Texture2D" uid="uid://bcpohw0b5n0rs" path="res://arts/head1.png" id="1_17nbg"]
+[ext_resource type="Script" path="res://scenes/snake.gd" id="1_cdj5s"]
+[ext_resource type="PackedScene" uid="uid://da20d0goca75m" path="res://scenes/snake_body.tscn" id="2_wg5ng"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lveep"]
+radius = 21.095
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6773a"]
+radius = 35.0571
+
+[node name="Snake" type="Area2D"]
+script = ExtResource("1_cdj5s")
+SnakeBody = ExtResource("2_wg5ng")
+
+[node name="Head" type="Sprite2D" parent="."]
+texture = ExtResource("1_17nbg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lveep")
+debug_color = Color(0.837219, 0.334044, 0.510488, 0.42)
+
+[node name="EatArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EatArea"]
+z_index = 1
+shape = SubResource("CircleShape2D_6773a")
+
+[node name="ShieldTimer" type="Timer" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lveep")
+debug_color = Color(0.837219, 0.334044, 0.510488, 0.42)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lveep")
+debug_color = Color(0.837219, 0.334044, 0.510488, 0.42)
+
+[connection signal="area_entered" from="." to="." method="_on_snake_entered"]
+[connection signal="area_entered" from="EatArea" to="." method="_on_bean_area_entered"]
+[connection signal="timeout" from="ShieldTimer" to="." method="_on_shield_timer_timeout"]
